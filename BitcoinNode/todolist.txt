@@ -1,0 +1,35 @@
+need to make a system that provdes iformation about number of addresses that have value above or below certain threshold
+how to achieve it ?
+it would be nice that the system can fulfill request about any arbitratry threshold, not only fixed values like 10, 100, 1000
+
+
+concept 1:
+in every block make a second DB with amount as a key it will satisfy all above requirements
+system is frendly for external user because it is moderatly fast
+
+cons:   significant increase in static memory usage
+
+concept 2:
+
+
+it would be useful to develop some sort of db format .dict
+first varint is number of rows in dict
+every row consits of :
+    varint length to read <key>
+    varint length to read <value>
+
+it is better to store large dicts in ldbs 
+due to high deserialization/ serialization times
+
+
+amount key address number value dictionary
+not big save as .dict
+key is amount::: value is nuber of addresses that have this particular amount
+"""amountDb"""
+
+ordered dictionary done and saved in .dict file
+to go back chainstate we need to update records in this dict 
+if value exists remove 1 from prev place and add 1 to current place
+if does not exists use insertion alg to add new value in right place and add 1
+
+performing extensive tests on addresDb and amountDb

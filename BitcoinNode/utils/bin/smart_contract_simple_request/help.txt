@@ -1,0 +1,40 @@
+eth_call
+Executes a new message call immediately without creating a transaction on the block chain.
+
+Parameters
+
+Object - The transaction call object
+from: DATA, 20 Bytes - (optional) The address the transaction is sent from.
+to: DATA, 20 Bytes - The address the transaction is directed to.
+gas: QUANTITY - (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas, but this parameter may be needed by some executions.
+gasPrice: QUANTITY - (optional) Integer of the gasPrice used for each paid gas
+value: QUANTITY - (optional) Integer of the value sent with this transaction
+data: DATA - (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI in the Solidity documentation
+QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending", see the default block parameter
+
+"url" : "https://mainnet.infura.io/v3/2357614e144644ee931dc6032df80542" etherium node
+"url" : "https://bsc-dataseed1.binance.org:443" binance smart chain node
+
+USAGE::
+SmartContract class takes url = /url to network node (example: url = etherium node address)
+SmartContract.function(eth_call_args : dict, abi : dict, name : str, eth_sm_args : list)
+
+eth_call_args           /dictionary of arguments for eth_call function (described above) in form of dictionary
+abi                     /dictionary structure to process available function names and generate hashes
+name                    /name of function in abi to be called in SmartContract
+eth_sm_args             /list of arguments for function in SmartContract
+
+example::
+
+entity = SmartContract(url="NODE_URL_ADDRESS")
+
+eth_call_args = {"to" : "SMART_CONTRACT_ADDRESS"}
+
+eth_sm_args = ["ACCOUNT_ADDRESS_ON_SMARTCONTRACT"]
+
+entity.function(eth_call_args, abi, "balanceOf", eth_sm_args)
+
+return::
+entity.function()       /returns json dict with response
+
+
